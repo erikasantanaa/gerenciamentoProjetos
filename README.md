@@ -1,24 +1,38 @@
-# gerenciamentoprojeto
+<img src="./src/assets/bannerReadme.png" width="1200">
 
-## Project setup
+# Gerenciamento de Projetos
+
+### 🚀 Como rodar o projeto:
+
+### 1️⃣ Clone o repositório:
+```
+git clone https://github.com/erikasantanaa/gerenciamentoProjetos.git
+```
+
+### 2️⃣ Entre no repositório:
+```
+cd gerenciamentoProjetos
+```
+
+### 3️⃣ Instale as dependências:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 4️⃣ Rode a aplicação:
+
 ```
 npm run serve
 ```
+---
 
-### Compiles and minifies for production
-```
-npm run build
-```
+⚡ Técnicas utilizadas:
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Componentes reutilizáveis.
+- Comunicação entre componentes.
+- Rotas. (Vue-Router)
+- Gerenciamento de estados. (Vues)
+- Layout responsivo.
+- Organização na arquitetura dos arquivos.
+- Boas práticas de desenvolvimento.
+- Clean Code.
