@@ -31,7 +31,7 @@ npm run serve
 - Componentes reutilizáveis.
 - Comunicação entre componentes.
 - Rotas. (Vue-Router)
-- Gerenciamento de estados. (Vues)
+- Gerenciamento de estados. (Vuex)
 - Layout responsivo.
 - Organização na arquitetura dos arquivos.
 - Boas práticas de desenvolvimento.
