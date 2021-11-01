@@ -5,7 +5,7 @@
 
     <div class="container p-3 card-container">
       <h2>Cadastrar novo Gerente</h2>
-      <b-form @submit="onSubmit">
+      <b-form>
         <div class="row mb-3">
           <b-col>
             <b-form-group
@@ -34,18 +34,29 @@
             </b-form-group>
           </b-col>
           <b-col>
-            <b-button type="submit" variant="success" class="cadastrar-button"
+            <b-button
+              type="submit"
+              variant="success"
+              class="cadastrar-button"
+              @click="saveGerente"
               >Cadastrar</b-button
             >
           </b-col>
         </div>
       </b-form>
+      <b-modal id="bv-modal-gerente" hide-footer>
+        <div class="d-block text-center">
+          <h3>Gerente cadastrado com sucesso!</h3>
+        </div>
+      </b-modal>
     </div>
   </div>
 </template>
 <script>
 import Header from "@/components/layout/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
+
+import { mapActions } from "vuex";
 
 export default {
   name: "CadastroGerente",
@@ -69,10 +80,15 @@ export default {
       ],
     };
   },
+  computed: {},
   methods: {
-    onSubmit(event) {
-      event.preventDefault();
-      console.log(JSON.stringify(this.gerente));
+    ...mapActions(["requestGerentes"]),
+    saveGerente() {
+      this.requestGerentes(this.gerente.nome);
+
+      setTimeout(() => {
+        this.$bvModal.show("bv-modal-gerente");
+      }, 1000);
     },
   },
 };

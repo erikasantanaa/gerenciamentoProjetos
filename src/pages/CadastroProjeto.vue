@@ -2,9 +2,8 @@
   <div>
     <Header />
     <Breadcrumbs :routePaths="items" />
-
     <div class="container p-3 card-container">
-      <b-form @submit="onSubmit" @reset="onReset">
+      <b-form @submit="onSubmit">
         <div class="row mb-3">
           <div class="col-sm">
             <b-form-group
@@ -105,20 +104,25 @@
         </div>
         <div class="row">
           <div class="col-sm"></div>
-          <div class="col-sm">
-            <b-button type="reset" variant="danger">Cancelar</b-button>
-          </div>
+          <div class="col-sm"></div>
           <div class="col-sm">
             <b-button type="submit" variant="primary">Salvar</b-button>
           </div>
         </div>
       </b-form>
+      <b-modal id="bv-modal-projeto" hide-footer>
+        <div class="d-block text-center">
+          <h3>Projeto cadastrado com sucesso!</h3>
+        </div>
+      </b-modal>
     </div>
   </div>
 </template>
 <script>
 import Header from "@/components/layout/Header";
 import Breadcrumbs from "@/components/Breadcrumbs";
+
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "CadastroProjeto",
@@ -133,14 +137,7 @@ export default {
         gerenteProjeto: null,
         quantidadeFuncionario: "",
       },
-      gerentes: [
-        { text: "Select One", value: null },
-        "João Silva",
-        "Carlos André",
-        "Erika Maria",
-        "Ana Alice",
-        "Wendell Calixto",
-      ],
+      gerentes: [],
       items: [
         {
           text: "Home",
@@ -153,19 +150,23 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters(["getGerentes"]),
+  },
+  mounted() {
+    this.setGerentes();
+  },
   methods: {
+    ...mapActions(["requestProjeto"]),
+    setGerentes() {
+      this.gerentes = this.$store.getters["getGerentes"];
+    },
     onSubmit(event) {
       event.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
-    onReset(event) {
-      event.preventDefault();
-      this.form.nomeProjeto = "";
-      this.form.dataInicial = "";
-      this.form.dataFinal = "";
-      this.form.descricao = "";
-      this.form.gerenteProjeto = [];
-      this.form.quantidadeFuncionario = "";
+      this.requestProjeto(this.form);
+      setTimeout(() => {
+        this.$bvModal.show("bv-modal-projeto");
+      }, 1000);
     },
   },
 };

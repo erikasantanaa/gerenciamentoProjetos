@@ -4,14 +4,20 @@
     <div class="container mt-5">
       <h2>Lista de projetos</h2>
     </div>
-
     <div class="container mt-3 p-3 card-container">
-      <b-table class="mt-5" striped hover :items="items"></b-table>
+      <b-table
+        class="mt-5"
+        striped
+        hover
+        :items="setTable"
+      ></b-table>
     </div>
   </div>
 </template>
 <script>
 import Header from "@/components/layout/Header";
+
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -33,17 +39,27 @@ export default {
           Gerente: "Carlos André",
           Quant_Funcionário: 9,
         },
-        {
-          Nome_projeto: "Projeto C",
-          Data_Inicial: "01/01/2022",
-          Data_Final: "12/12/2022",
-          Gerente: "Ana Alice",
-          Quant_Funcionário: 23,
-        },
       ],
+      projetos: null,
+      setTable: null
     };
   },
-  methods: {},
+  computed: {
+    ...mapGetters(["getProjetos"]),
+  },
+  mounted() {
+    this.setProjetos();
+  },
+  methods: {
+    setProjetos() {
+      this.projetos = this.$store.getters["getProjetos"];
+      if(this.projetos.length > 0) {
+        this.setTable = this.projetos
+      } else {
+        this.setTable = this.items
+      }
+    },
+  },
 };
 </script>
 
